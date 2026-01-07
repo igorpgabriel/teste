@@ -1,5 +1,9 @@
-import datetime
+# main.py
+import logging
 
 def funcao_teste():
-    agora = datetime.datetime.now()
-    print(f"Executando lógica principal às {agora}")
+    # Em vez de print("Olá"), use:
+    logging.info("--- Log de Execução: A lógica principal rodou com sucesso! ---")
+    
+    # Se quiser registrar um erro:
+    # logging.error("Algo deu errado aqui")
