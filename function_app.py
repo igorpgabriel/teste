@@ -1,13 +1,8 @@
 import azure.functions as func
 import logging
 import datetime
-from .main import funcao_teste
-print("RODANDO")
-# Importação correta para o ambiente Linux do Azure
-try:
-    from .main import funcao_teste
-except Exception as e:
-    logging.error(f"Falha no import inicial: {e}")
+import sys
+import os
 
 app = func.FunctionApp()
 
@@ -15,10 +10,15 @@ app = func.FunctionApp()
 def timer_trigger_teste(myTimer: func.TimerRequest) -> None:
     logging.info('O gatilho do timer foi disparado.')
     
-    # Tentativa de importação local caso a global falhe
     try:
+        # Tenta importar o arquivo main.py que está na mesma pasta
+        import main
+        main.funcao_teste()
+        logging.info('funcao_teste executada com sucesso.')
+    except ImportError:
+        # Se falhar (comum no Linux da Azure), tenta o import relativo
         from .main import funcao_teste
         funcao_teste()
-        logging.info('funcao_teste executada com sucesso.')
+        logging.info('funcao_teste executada com sucesso via import relativo.')
     except Exception as e:
         logging.error(f"Erro na execucao da funcao_teste: {e}")
