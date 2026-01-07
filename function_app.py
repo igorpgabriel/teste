@@ -1,7 +1,8 @@
 import azure.functions as func
 import datetime
 import logging
-from main import funcao_teste
+# Adicione o ponto antes de main se o arquivo estiver na mesma pasta
+from .main import funcao_teste 
 
 app = func.FunctionApp()
 
