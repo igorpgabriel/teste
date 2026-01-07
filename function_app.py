@@ -1,7 +1,8 @@
 import azure.functions as func
 import logging
 import datetime
-
+from .main import funcao_teste
+print("RODANDO")
 # Importação correta para o ambiente Linux do Azure
 try:
     from .main import funcao_teste
