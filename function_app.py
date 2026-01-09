@@ -1,4 +1,5 @@
 import azure.functions as func
+from .main import funcao_teste
 import logging
 import datetime
 import sys
@@ -11,13 +12,10 @@ def timer_trigger_teste(myTimer: func.TimerRequest) -> None:
     logging.info('O gatilho do timer foi disparado.')
     
     try:
-        # Tenta importar o arquivo main.py que está na mesma pasta
         import main
         main.funcao_teste()
         logging.info('funcao_teste executada com sucesso.')
     except ImportError:
-        # Se falhar (comum no Linux da Azure), tenta o import relativo
-        from .main import funcao_teste
         funcao_teste()
         logging.info('funcao_teste executada com sucesso via import relativo.')
     except Exception as e:
